@@ -28,13 +28,15 @@ $("#submit").on("click", function(e) {
             url: GEOCODE + query
         }).done(function(result) {
             console.log(result)
+            let position = {
+                lat: result.results[0].geometry.location.lat,
+                lng: result.results[0].geometry.location.lng
+            }
             let newMarker = new google.maps.Marker({
-                position: {
-                    lat: result.results[0].geometry.location.lat,
-                    lng: result.results[0].geometry.location.lng
-                },
+                position: position,
                 map: map
             })
+            map.setCenter(position)
         })
     })
     /*https://maps.googleapis.com/maps/api/geocode/
